@@ -15,6 +15,12 @@ python "../Open-GroundingDino/tools/inference_on_a_image.py" \
 -i: path to image file 
 -t: text prompt
 -o: output directory
+```
 
+## Inference in CARLA
+Start CARLA, then:
 
-
+```bash
+$ cd cmu_vlr_final
+$ python3 carla_example.py
+```

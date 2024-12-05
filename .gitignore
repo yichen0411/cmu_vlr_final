@@ -1,0 +1,9 @@
+10k*
+100k*
+*.Identifier
+*.zip
+*.pth
+*.whl
+*.egg
+*.pyc
+*.json
