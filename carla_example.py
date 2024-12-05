@@ -153,7 +153,7 @@ def get_grounding_output(model, image, caption, box_threshold, text_threshold=No
 config_file = "../Open-GroundingDino/tools/GroundingDINO_SwinT_OGC.py"
 checkpoint_path = "./checkpoint0008.pth"
 image_path = "./banana.png"
-text_prompt = "car"
+text_prompt = "tree"
 output_dir = "./pred_images"
 box_threshold = 0.3
 text_threshold = 0.25
@@ -200,17 +200,31 @@ world = client.get_world()
 
 # Get a vehicle from the library
 bp_lib = world.get_blueprint_library()
-vehicle_bp = bp_lib.find('vehicle.lincoln.mkz_2020')
+# vehicle_bp = bp_lib.find('vehicle.*')
 
 # Get a spawn point
 spawn_points = world.get_map().get_spawn_points()
 
-# Spawn a vehicle
-vehicle = world.try_spawn_actor(vehicle_bp, random.choice(spawn_points))
+for i in range(25):
+    print("Spawning a vehicle")
+    # Spawn a vehicle
+    vehicle_bp = random.choice(bp_lib.filter('vehicle.*.*'))
+    vehicle = world.try_spawn_actor(vehicle_bp, random.choice(spawn_points))
 
-# Autopilot
-vehicle.set_autopilot(True) 
+    # Autopilot
+    if vehicle is not None:
+        vehicle.set_autopilot(True) 
 
+while vehicle is None:
+    print("Spawning a vehicle")
+    # Spawn a vehicle
+    vehicle_bp = random.choice(bp_lib.filter('vehicle.*.*'))
+    vehicle = world.try_spawn_actor(vehicle_bp, random.choice(spawn_points))
+
+    # Autopilot
+    if vehicle is not None:
+        vehicle.set_autopilot(True) 
+        
 # Get the world spectator 
 spectator = world.get_spectator() 
 
